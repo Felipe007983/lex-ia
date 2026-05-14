@@ -366,6 +366,8 @@ def perform_login(driver, wait):
             time.sleep(2)
             
         print("Tempo limite de login excedido (3 minutos).")
+        driver.save_screenshot("erro_login.png")
+        print("DEBUG: Screenshot de erro salva como 'erro_login.png'.")
         return False
 
     except Exception as e:
