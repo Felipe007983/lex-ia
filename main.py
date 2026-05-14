@@ -706,8 +706,13 @@ def force_start_chrome_debug():
                 print(f"ERRO: Chrome não encontrado no Windows.")
                 return False
         else:
-            # Linux
-            cmd = f'google-chrome --remote-debugging-port=9222 --user-data-dir="{user_data_dir}" &'
+            # Linux (Headless via Xvfb)
+            cmd = (
+                'xvfb-run --server-args="-screen 0 1920x1080x24" '
+                'google-chrome --remote-debugging-port=9222 '
+                f'--user-data-dir="{user_data_dir}" '
+                '--no-sandbox --disable-dev-shm-usage --disable-gpu &'
+            )
             os.system(cmd)
             
         print("Chrome iniciado! Aguardando 5 segundos para carregar...")

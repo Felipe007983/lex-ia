@@ -10,10 +10,13 @@ echo "==================================================="
 # 1. Atualizar pacotes
 sudo apt update
 
-# 2. Instalar Google Chrome (se não existir)
+# 2. Instalar Google Chrome e dependências para Headless (Xvfb)
+echo "Instalando dependências de sistema (Chrome + Xvfb)..."
+sudo apt install -y xvfb libxi6 libgconf-2-4 libnss3 libxss1 libasound2 fonts-liberation libgbm1 xauth
+
 if ! command -v google-chrome &> /dev/null
 then
-    echo "Instalando Google Chrome..."
+    echo "Baixando e instalando Google Chrome..."
     wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
     sudo apt install -y ./google-chrome-stable_current_amd64.deb
     rm google-chrome-stable_current_amd64.deb
