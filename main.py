@@ -706,12 +706,13 @@ def force_start_chrome_debug():
                 print(f"ERRO: Chrome não encontrado no Windows.")
                 return False
         else:
-            # Linux (Headless via Xvfb)
+            # Linux (Headless via Xvfb) - Reforçado para Root
             cmd = (
                 'xvfb-run --server-args="-screen 0 1920x1080x24" '
                 'google-chrome --remote-debugging-port=9222 '
                 f'--user-data-dir="{user_data_dir}" '
-                '--no-sandbox --disable-dev-shm-usage --disable-gpu &'
+                '--no-sandbox --disable-setuid-sandbox --disable-dev-shm-usage '
+                '--disable-gpu --no-zygote --headless=new &'
             )
             os.system(cmd)
             

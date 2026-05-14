@@ -14,8 +14,11 @@ xvfb-run --server-args="-screen 0 1920x1080x24" \
 google-chrome --remote-debugging-port=9222 \
               --user-data-dir="$USER_DATA_DIR" \
               --no-sandbox \
+              --disable-setuid-sandbox \
               --disable-dev-shm-usage \
               --disable-gpu \
+              --no-zygote \
+              --headless=new \
               --window-size=1920,1080 > /dev/null 2>&1 &
 
 echo ""
