@@ -10,10 +10,11 @@ echo "Iniciando Google Chrome com Monitor Virtual (Xvfb) na Porta 9222..."
 USER_DATA_DIR="$HOME/selenium_chrome_profile"
 
 # xvfb-run simula um monitor real para evitar detecção de bot e permitir que o Chrome abra
-xvfb-run --server-args="-screen 0 1920x1080x24" \
-google-chrome --remote-debugging-port=9222 \
+# -a (auto-servernum) evita conflitos se o Xvfb já estiver rodando
+xvfb-run -a --server-args="-screen 0 1920x1080x24" \
+google-chrome --no-sandbox \
+              --remote-debugging-port=9222 \
               --user-data-dir="$USER_DATA_DIR" \
-              --no-sandbox \
               --disable-setuid-sandbox \
               --disable-dev-shm-usage \
               --disable-gpu \

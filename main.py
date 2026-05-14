@@ -17,6 +17,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 import pdfplumber
 import psycopg2
 from dotenv import load_dotenv
+import subprocess
 
 import openai
 import pyotp
@@ -707,14 +708,25 @@ def force_start_chrome_debug():
                 return False
         else:
             # Linux (Headless via Xvfb) - Reforçado para Root
-            cmd = (
-                'xvfb-run --server-args="-screen 0 1920x1080x24" '
-                'google-chrome --remote-debugging-port=9222 '
-                f'--user-data-dir="{user_data_dir}" '
-                '--no-sandbox --disable-setuid-sandbox --disable-dev-shm-usage '
-                '--disable-gpu --no-zygote --headless=new &'
-            )
-            os.system(cmd)
+            print(f"DEBUG: Iniciando Chrome no Linux com perfil em {user_data_dir}")
+            args = [
+                "xvfb-run", "-a", "--server-args=-screen 0 1920x1080x24",
+                "google-chrome",
+                "--no-sandbox",
+                "--remote-debugging-port=9222",
+                f"--user-data-dir={user_data_dir}",
+                "--disable-setuid-sandbox",
+                "--disable-dev-shm-usage",
+                "--disable-gpu",
+                "--no-zygote",
+                "--headless=new",
+                "--window-size=1920,1080"
+            ]
+            try:
+                subprocess.Popen(args, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            except Exception as e:
+                print(f"Erro ao disparar subprocesso Chrome: {e}")
+                return False
             
         print("Chrome iniciado! Aguardando 5 segundos para carregar...")
         time.sleep(5)
