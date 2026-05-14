@@ -1,0 +1,10 @@
+selenium
+webdriver-manager
+pdfplumber
+openai
+psycopg2-binary
+google-genai
+pydantic
+pyotp
+requests
+python-dotenv

@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-slate-950 text-slate-100 antialiased leading-relaxed;
+}
+
+.glass-panel {
+  @apply bg-slate-900/80 backdrop-blur-md border border-slate-800 shadow-2xl;
+}
+
+.input-field {
+  @apply w-full bg-slate-950/50 border border-slate-800 rounded-lg outline-none focus:border-red-600 transition-colors text-slate-200 placeholder-slate-500 h-12;
+}
+
+.btn-primary {
+  @apply w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 rounded-lg transition-all duration-300 shadow-lg shadow-red-900/20 active:scale-95;
+}
